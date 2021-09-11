@@ -1,0 +1,75 @@
+< THE SYMBOL TABLE >  CSLLT.exe  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+STACK                    	00000     	-5        	SEGMENT   	(ITSELF)  
+DATA                     	00010     	-5        	SEGMENT   	(ITSELF)  
+TITLE1                   	00000     	1         	VAR       	data      
+TITLE7                   	0002A     	1         	VAR       	data      
+TITLE2                   	00039     	1         	VAR       	data      
+TITLE3                   	00044     	1         	VAR       	data      
+TITLE4                   	00051     	1         	VAR       	data      
+TITLE5                   	00060     	1         	VAR       	data      
+TITLE6                   	0006A     	1         	VAR       	data      
+ORDER1                   	0007B     	1         	VAR       	data      
+ORDER2                   	0008E     	1         	VAR       	data      
+ORDER3                   	000A8     	1         	VAR       	data      
+ORDER4                   	000C2     	1         	VAR       	data      
+ORDER5                   	000DC     	1         	VAR       	data      
+ORDER6                   	000F6     	1         	VAR       	data      
+ORDER7                   	00110     	1         	VAR       	data      
+ORDER8                   	0012A     	1         	VAR       	data      
+ORDER9                   	00144     	1         	VAR       	data      
+ORDER10                  	0014E     	1         	VAR       	data      
+PAY1                     	0015F     	1         	VAR       	data      
+PAY2                     	00174     	1         	VAR       	data      
+PAY3                     	0018C     	1         	VAR       	data      
+REMAINING                	0019A     	1         	VAR       	data      
+INV                      	001AA     	1         	VAR       	data      
+ITEM1                    	001C2     	1         	VAR       	data      
+ITEM2                    	001D0     	1         	VAR       	data      
+ITEM3                    	001E6     	1         	VAR       	data      
+ITEM4                    	001FC     	1         	VAR       	data      
+ITEM5                    	0020F     	1         	VAR       	data      
+ITEM6                    	00225     	1         	VAR       	data      
+ITEM7                    	00233     	1         	VAR       	data      
+FOODRICE                 	00244     	1         	VAR       	data      
+FOODCHICKENCURRY         	00245     	1         	VAR       	data      
+FOODMIXVEG               	00246     	1         	VAR       	data      
+FOODFRIEDRICE            	00247     	1         	VAR       	data      
+FOODFRIEDCHICKEN         	00248     	1         	VAR       	data      
+DRINKPEPSI               	00249     	1         	VAR       	data      
+DRINK100PLUS             	0024A     	1         	VAR       	data      
+BILL                     	0024B     	1         	VAR       	data      
+SPACE                    	0024C     	1         	VAR       	data      
+INP                      	00250     	1         	VAR       	data      
+ERROR                    	00266     	1         	VAR       	data      
+TEN                      	00283     	1         	VAR       	data      
+TEMP                     	00284     	1         	VAR       	data      
+TEMP2                    	00285     	1         	VAR       	data      
+TEMP3                    	00286     	1         	VAR       	data      
+NUM1                     	00287     	1         	VAR       	data      
+NUM2                     	00288     	1         	VAR       	data      
+NUM3                     	00289     	1         	VAR       	data      
+EXMSG                    	0028A     	1         	VAR       	data      
+CODE                     	0003A     	-5        	SEGMENT   	(ITSELF)  
+MAIN                     	00000     	-1        	NEAR      	code      
+FRONT                    	00005     	-1        	LABEL     	code      
+INVALID                  	0006E     	-1        	LABEL     	code      
+ORDER                    	00083     	-1        	LABEL     	code      
+PAYMENT                  	0011C     	-1        	LABEL     	code      
+INVENTORY                	0017C     	-1        	LABEL     	code      
+NEWORDER                 	0025B     	-1        	LABEL     	code      
+O1                       	00263     	-1        	LABEL     	code      
+O2                       	00270     	-1        	LABEL     	code      
+O3                       	0027D     	-1        	LABEL     	code      
+O4                       	0028A     	-1        	LABEL     	code      
+O5                       	00297     	-1        	LABEL     	code      
+O6                       	002A4     	-1        	LABEL     	code      
+O7                       	002B1     	-1        	LABEL     	code      
+P1                       	002BE     	-1        	LABEL     	code      
+EXIT                     	00337     	-1        	LABEL     	code      
+===================================================================================================
+[ 9/1/2020  --  8:53:40 AM ] 
+< END >
+ 

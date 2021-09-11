@@ -1,0 +1,529 @@
+.model large
+.stack 100h
+.data
+
+;TITLE SCREEN
+
+title1 db 10,13,"***** ELRIC'S FOOD COURT, WELCOME *****$"
+title7 db 10,13,"1. New Order$"
+title2 db 10,13,"2. Order$"
+title3 db 10,13,"3. Payment$"
+title4 db 10,13,"4. Inventory$"
+title5 db 10,13,"5. Exit$"
+title6 db 10,13,"Enter option: $"
+
+;ORDER SCREEN
+
+order1  db 10,13,"***** MENU *****$"
+order2  db 10,13,"1. RICE            RM 2$"
+order3  db 10,13,"2. CHICKEN CURRY   RM 5$"
+order4  db 10,13,"3. MIX VEGITABLE   RM 5$"
+order5  db 10,13,"4. FRIED RICE      RM 8$"
+order6  db 10,13,"5. FRIED CHICKEN   RM 8$"
+order7  db 10,13,"6. PEPSI           RM 3$"
+order8  db 10,13,"7. 100 PLUS        RM 2$"
+order9  db 10,13,"8. BACK$"
+order10 db 10,13,"Enter option: $"
+
+;PAYMENT SCREEN
+
+pay1      db 10,13,"**** BILLING *****$"
+pay2      db 10,13,"Your total bill is:RM$"
+pay3      db 10,13,"Pay here:RM$"
+remaining db 10,13,"Remaining RM:$"
+
+;INVENTORY SCREEN
+
+inv     db 10,13,"***** INVENTORY *****$"
+item1   db 10,13,"1. RICE - $ "
+item2   db 10,13,"2. CHICKEN CURRY - $"
+item3   db 10,13,"3. MIX VEGITABLE - $"
+item4   db 10,13,"4. FRIED RICE - $"
+item5   db 10,13,"5. FRIED CHICKEN - $"
+item6   db 10,13,"6. PEPSI - $"
+item7   db 10,13,"7. 100 PLUS - $"
+
+;INVENTORY ITEM QUANTITY
+
+foodRice          db 9
+foodChickenCurry  db 9
+foodMixVeg        db 9
+foodFriedRice     db 9
+foodFriedChicken  db 9
+drinkPepsi        db 9
+drink100Plus      db 9
+
+;MISCELLANIOUS
+
+bill   db ?
+space  db 10,13," $"
+inp    db 10,13,"Enter 1 to return: $"
+error  db 10,13,"ERROR, enter 1 to return: $"
+ten    db 10
+temp   db 0
+temp2  db 0
+temp3  db 0
+num1   db 0
+num2   db 0
+num3   db 0
+exmsg  db 10,13,"PROGRAM ENDED$"
+
+;CODE
+
+.code
+main proc
+
+mov ax, @data
+mov ds, ax
+
+Front:;TITLE SCREEN
+
+mov ah, 00
+mov al, 02
+int 10h
+
+mov ah, 09h
+mov dx, offset title1
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset title7
+int 21h
+
+mov ah, 09h
+mov dx, offset title2
+int 21h
+
+mov ah, 09h
+mov dx, offset title3
+int 21h
+
+mov ah, 09h
+mov dx, offset title4
+int 21h
+
+mov ah, 09h
+mov dx, offset title5
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset title6
+int 21h
+
+mov ah, 01h
+int 21h
+
+cmp al, "1"
+je newOrder
+
+cmp al, "2"
+je order
+
+cmp al, "3"
+je payment
+
+cmp al, "4"
+je inventory
+
+cmp al, "5"
+je exit
+
+Invalid:;ERROR MESSAGE
+
+mov ah, 00
+mov al, 02
+int 10h
+
+mov ah, 09h
+mov dx, offset error
+int 21h
+
+mov ah, 01h
+mov dl,al
+int 21h
+
+jmp Front
+
+order:;NEW ORDER
+
+mov ah, 00
+mov al, 02
+int 10h
+
+mov ah, 09h
+mov dx, offset order1
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset order2
+int 21h
+
+mov ah, 09h
+mov dx, offset order3
+int 21h
+
+mov ah, 09h
+mov dx, offset order4
+int 21h
+
+mov ah, 09h
+mov dx, offset order5
+int 21h
+
+mov ah, 09h
+mov dx, offset order6
+int 21h
+
+mov ah, 09h
+mov dx, offset order7
+int 21h
+
+mov ah, 09h
+mov dx, offset order8
+int 21h
+
+mov ah, 09h
+mov dx, offset order9
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset order10
+int 21h
+
+mov ah, 01h
+int 21h
+
+cmp al, "1"
+je o1
+
+cmp al, "2"
+je o2
+
+cmp al, "3"
+je o3
+
+cmp al, "4"
+je o4
+
+cmp al, "5"
+je o5
+
+cmp al, "6"
+je o6
+
+cmp al, "7"
+je o7
+
+cmp al, "8"
+je Front
+
+jmp Invalid
+
+payment:;PAYMENT
+
+mov ah, 00
+mov al, 02
+int 10h
+
+mov ah, 09h
+mov dx, offset pay1
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset pay2
+int 21h
+
+cmp bill, 9
+ja p1
+
+mov al, bill
+mov dl, al
+add al, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset pay3
+int 21h
+
+mov ah, 01h
+int 21h
+
+sub dl, al
+
+mov ah, 09h
+mov dx, offset remaining
+int 21h
+
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset inp
+int 21h
+
+mov ah, 01h
+int 21h
+
+jmp Front
+
+inventory:;INVENTORY
+
+mov ah, 00
+mov al, 02
+int 10h
+
+mov ah, 09h
+mov dx, offset inv
+int 21h
+
+mov ah, 09h
+mov dx, offset item1
+int 21h
+
+mov al, foodRice
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset item2
+int 21h
+
+mov al, foodChickenCurry
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset item3
+int 21h
+
+mov al, foodMixVeg
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset item4
+int 21h
+
+mov al, foodFriedRice
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset item5
+int 21h
+
+mov al, foodFriedChicken
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset item6
+int 21h
+
+mov al, drinkPepsi
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset item7
+int 21h
+
+mov al, drink100Plus
+mov ah, 00
+mov dl, ah
+mov temp2, dl
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset inp
+int 21h
+
+mov ah, 01h
+int 21h
+
+jmp Front
+
+newORder:
+mov bill, 0
+jmp order
+
+o1:
+add bill, 2
+sub foodRice, 1
+jmp order
+
+o2:
+add bill, 5
+sub foodChickenCurry, 1
+jmp order
+
+o3:
+add bill, 5
+sub foodMixVeg, 1
+jmp order
+
+o4:
+add bill, 8
+sub foodFriedRice, 1
+jmp order
+
+o5:
+add bill, 8
+sub foodFriedChicken, 1
+jmp order
+
+o6:
+add bill, 3
+sub drinkPepsi, 1
+jmp order
+
+o7:
+add bill, 2
+sub drink100Plus, 1
+jmp order
+
+p1:
+mov al, bill
+mov ah, 00
+div ten
+
+mov dl, ah
+mov temp, dl
+
+mov dl, al
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov dl, temp
+add dl, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset pay3
+int 21h
+
+mov ah, 01h
+int 21h
+sub al, 48
+mov num1, al
+
+mov ah, 01h
+int 21h
+sub al, 48
+mov num2, al
+
+mov al, num1
+mul ten
+add al, num2
+
+mov num3, al
+
+mov al, bill
+sub al, num3
+mov bill, al
+
+mov ah, 09h
+mov dx, offset remaining
+int 21h
+
+mov al, bill
+add al, 48
+mov ah, 02h
+int 21h
+
+mov ah, 09h
+mov dx, offset space
+int 21h
+
+mov ah, 09h
+mov dx, offset inp
+int 21h
+
+mov ah, 01h
+int 21h
+
+jmp Front
+
+exit:
+mov ah, 00
+mov al, 02
+int 10h
+
+mov ah, 09h
+mov dx, offset exmsg
+int 21h
+
+mov ah, 4ch
+int 21h
+
+main endp
+end main
+
+
+
+; [SOURCE]: E:\uni\04. 4th semester\CSLLT\assign\assign code\CSLLT.asm
